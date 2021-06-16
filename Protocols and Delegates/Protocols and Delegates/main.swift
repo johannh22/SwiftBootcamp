@@ -25,3 +25,35 @@ struct Paramedic: AdvancedLifeSupport {
         print("The paramedic does chest compressions, 30 per second.")
     }
 }
+
+class Doctor: AdvancedLifeSupport {
+    
+    init(handler: EmergencyCallHandler) {
+        handler.delegate = self
+    }
+    
+    func performCPR() {
+        print("The doctor does chest compressions, 30 per second.")
+    }
+    
+    func useSthethescope() {
+        print("Listening for heart sounds.")
+    }
+}
+
+class Surgeon: Doctor {
+    override func performCPR() {
+        super.performCPR()
+        print("Sings 'Staying Alive' by The BeeGees")
+    }
+    
+    func useElectricDrill() {
+        print("Whirr...")
+    }
+}
+
+let emilio = EmergencyCallHandler()
+let angela = Surgeon(handler: emilio)
+
+emilio.assessSituation()
+emilio.medicalEmergency()
